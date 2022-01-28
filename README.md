@@ -1,5 +1,5 @@
 # ThingiZIP [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
-ThingiZIP is a web browser extension that makes it easy to download images and STL files from Thingiverse™. This extension creates a download button on the page when viewing a model on Thingiverse™ and an interactable popup in the toolbar of your browser. This project utilizes the Thingiverse™ API. Please note that if the Thingiverse™ API changes, the performance and/or functionality of this extension may be impacted.
+ThingiZIP is a web browser extension that makes it easy to download images and files from Thingiverse™. This extension creates a download button on the page when viewing a model on Thingiverse™ and an interactive popup in the toolbar of your browser. This project utilizes the Thingiverse™ API. Please note that if the Thingiverse™ API changes, the performance and/or functionality of this extension may be impacted.
 
 
 

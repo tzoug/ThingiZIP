@@ -1,4 +1,6 @@
-# ThingiZIP [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
+<img src="images/ThingiZIP.png" alt="drawing" width="50"/>
+
+#  ThingiZIP [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) 
 ThingiZIP is a web browser extension that makes it easy to download images and files from Thingiverse™. This extension creates a download button on the page when viewing a model on Thingiverse™ and an interactive popup in the toolbar of your browser. This project utilizes the Thingiverse™ API. Please note that if the Thingiverse™ API changes, the performance and/or functionality of this extension may be impacted.
 
 
@@ -17,12 +19,12 @@ There are 2 ways of downloading using ThingiZIP.
 1. From a valid Thingiverse™ page
     - Click the `Download ZIP` button on the Thingiverse™ page.  
     
-        <img src="screenshots/website-download-option.jpg" alt="drawing" width="500"/>
+        <img src="images/website-download-option.jpg" alt="drawing" width="500"/>
 2. From the ThingiZIP popup
     - Click on the extension logo in the extensions bar (usually on the top right corner of the browser)
     - You then have the option to download a ZIP file by clicking the `Download ZIP` button.
     
-        <img src="screenshots/popup-download-option.jpg" alt="drawing" width="500"/>
+        <img src="images/popup-download-option.jpg" alt="drawing" width="500"/>
     *If the button is greyed out (disabled) then it means that you are not currently on a valid Thingiverse™ page. If you believe that this is a mistake, you can refresh the Thingiverse™ and reopen the extension popup. This should fix the issue.
 
 When the download is complete, you will have a zip containing 3 items.
@@ -61,12 +63,12 @@ Contributions are always welcome!
 ## Screenshots
 ### Download from website
 
-<img src="screenshots/website-download-option.jpg" alt="drawing" width="700"/>
+<img src="images/website-download-option.jpg" alt="drawing" width="700"/>
 
 ### Download from popup
 
-<img src="screenshots/popup-download-option.jpg" alt="drawing" width="700"/>
+<img src="images/popup-download-option.jpg" alt="drawing" width="700"/>
 
 ### Settings page
 
-<img src="screenshots/popup-settings.jpg" alt="drawing" width="700"/>
+<img src="images/popup-settings.jpg" alt="drawing" width="700"/>

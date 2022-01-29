@@ -58,7 +58,7 @@ Contributions are always welcome!
 ## Download
 
 - [Chrome Web Store](https://chrome.google.com/webstore/category/extensions)
-- [Firefox Addon Store ](https://addons.mozilla.org/en-CA/firefox/)
+- [Firefox Addon Store ](https://addons.mozilla.org/en-CA/firefox/addon/thingizip/)
 
 ## Screenshots
 ### Download from website

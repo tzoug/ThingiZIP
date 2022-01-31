@@ -7,7 +7,7 @@
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request == "Please create default settings") {
     createDefaultSettings();
-    if (sender.origin == "https://www.thingiverse.com") {
+    if (sender.tab.url.includes("https://www.thingiverse.com/thing:")) {
       chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
         chrome.tabs.sendMessage(tabs[0].id, "Default settings created and saved");  
       });

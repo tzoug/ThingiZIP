@@ -30,6 +30,7 @@
     "permissions": [
         "storage",
         "tabs",
-        "https://api.thingiverse.com/*"
+        "https://api.thingiverse.com/*",
+        "https://cdn.thingiverse.com/*"
         ]
 }

@@ -22,6 +22,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("Popup is asking if content script is here");
   }
   else if (request == "Default settings created and saved") {
+    console.log("Default settings created and saved");
     checkForUserSetting();
   }
 });
@@ -233,7 +234,7 @@ const downloadZIP = (whoClicked) => {
     zip.file(`Images/${filename}`, urlToPromise(downloadUrl), { binary: true });
   }
 
-  //-- Loop through stl files and add them to Files directory in zip
+  // -- Loop through stl files and add them to Files directory in zip
   for (const file of filesJson) {
     let filename = file["name"];
     let downloadUrl = file["public_url"];
@@ -246,8 +247,9 @@ const downloadZIP = (whoClicked) => {
     return new Promise(function (resolve, reject) {
       JSZipUtils.getBinaryContent(url, function (err, data) {
         if (err) {
-          reject(err);
-        } else {
+          throw err;
+        }
+        else{
           resolve(data);
         }
       });
@@ -255,15 +257,20 @@ const downloadZIP = (whoClicked) => {
   }
 
   // -- Generate de zip file
-  zip.generateAsync({ type: "blob" }).then(function callback(blob) {
-    saveAs(blob, `${modelName}.zip`);
-    if (whoClicked === "popup") {
-      sendDownloadCompleteToPopup();
-    }
-    else if (whoClicked === "website") {
-      hideLoading();
-    }
-  });
+  try{
+    zip.generateAsync({ type: "blob" }).then(function callback(blob) {
+      saveAs(blob, `${modelName}.zip`);
+      if (whoClicked === "popup") {
+        sendDownloadCompleteToPopup();
+      }
+      else if (whoClicked === "website") {
+        hideLoading();
+      }
+    });
+  }
+  catch(error){
+    console.log(error);
+  }
 }
 
 /**

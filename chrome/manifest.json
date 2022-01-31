@@ -25,9 +25,5 @@
     "action":{
         "default_popup": "HTML/popup.html"
     },
-    "permissions": [
-        "storage",
-        "tabs"
-        ],
-    "host_permissions": ["https://api.thingiverse.com/*"]
+    "permissions": ["storage"]
 }

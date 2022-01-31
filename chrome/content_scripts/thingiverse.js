@@ -45,7 +45,6 @@ const checkForUserSetting = () => {
     } 
     else {
       userPrefs = data.userSettings;
-      console.log(userPrefs);
       console.log("User settings found");
       if (data.userSettings.showDownloadOnWebsite == true) {
         console.log("Download button is enabled by user");

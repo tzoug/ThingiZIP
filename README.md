@@ -57,7 +57,7 @@ Contributions are always welcome!
 - [FileSaver](https://github.com/eligrey/FileSaver.js/) : save ZIP files 
 ## Download
 
-- [Chrome Web Store](https://chrome.google.com/webstore/category/extensions)
+- [Chrome Web Store](https://chrome.google.com/webstore/detail/thingizip/maonfmeilcpjfdipacfehiidjngcoama)
 - [Firefox Addon Store ](https://addons.mozilla.org/en-CA/firefox/addon/thingizip/)
 
 ## Screenshots

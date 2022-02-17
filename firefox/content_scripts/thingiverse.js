@@ -1,7 +1,7 @@
-let detailsJson = {};
-let imagesJson = {};
-let filesJson = {};
-let userPrefs = {};
+var detailsJson = {};
+var imagesJson = {};
+var filesJson = {};
+var userPrefs = {};
 
 window.onload = function () {
   storeJson();
@@ -69,16 +69,16 @@ const storeJson = () => {
   let thingImages = makeAPICall(thingId, "images");
   let thingFiles = makeAPICall(thingId, "files");
   
-  Promise.all([thingDetails, thingImages, thingFiles]).then(function (values) {
-    detailsJson = values[0];
-    imagesJson = values[1];
-    filesJson = values[2];
+  // Promise.all([thingDetails, thingImages, thingFiles]).then(function (values) {
+  //   detailsJson = values[0];
+  //   imagesJson = values[1];
+  //   filesJson = values[2];
 
-    chrome.storage.local.set({'thingDetails': detailsJson});
-    chrome.storage.local.set({'thingImages': imagesJson});
-    chrome.storage.local.set({'thingFiles': filesJson});
-    saveInfoJson();
-  });  
+  //   chrome.storage.local.set({'thingDetails': detailsJson});
+  //   chrome.storage.local.set({'thingImages': imagesJson});
+  //   chrome.storage.local.set({'thingFiles': filesJson});
+  //   saveInfoJson();
+  // });  
 }
 
 /**
@@ -192,19 +192,37 @@ const makeAPICall = (thingId, endpoint) => {
   let token = "201f5af321613bba4669214ec393d6de"; // this is a read-only token from Thingiverse
   let url;
   if (endpoint == "") {
-    url = `https://api.thingiverse.com/things/${thingId}?access_token=${token}`;
+    url = `https://api.thingiverse.com/things/${thingId}`;
   } else if (endpoint == "files") {
-    url = `https://api.thingiverse.com/things/${thingId}/files?access_token=${token}`;
+    url = `https://api.thingiverse.com/things/${thingId}/files`;
   } else if (endpoint == "images") {
-    url = `https://api.thingiverse.com/things/${thingId}/images?access_token=${token}`;
+    url = `https://api.thingiverse.com/things/${thingId}/images`;
   }
-  return fetch(
-    url,
-    (headers = {
-      "Authorization": "Bearer 56edfc79ecf25922b98202dd79a291aa",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0",
-    })
-  ).then((res) => res.json());
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.setRequestHeader("Authorization", "Bearer 56edfc79ecf25922b98202dd79a291aa")
+  xhr.responseType = 'text';
+  
+  xhr.onload = function () {
+      if (xhr.readyState === xhr.DONE) {
+          if (xhr.status === 200) {
+              if (endpoint == ""){
+                chrome.storage.local.set({'thingDetails': detailsJson});
+                detailsJson = JSON.parse(xhr.responseText);
+              }
+              else if (endpoint == "images"){
+                chrome.storage.local.set({'thingImages': imagesJson});
+                  imagesJson = JSON.parse(xhr.responseText);
+              }
+              else if (endpoint == "files"){
+                chrome.storage.local.set({'thingFiles': filesJson});
+                filesJson = JSON.parse(xhr.responseText);
+                setTimeout(() => { saveInfoJson(); } , 1000);
+              }
+          }
+      }
+  };
+  xhr.send(null);
 };
 
 /**

@@ -68,41 +68,41 @@ const storeJson = () => {
   let thingDetails = makeAPICall(thingId, "");
   let thingImages = makeAPICall(thingId, "images");
   let thingFiles = makeAPICall(thingId, "files");
-  
-  // Promise.all([thingDetails, thingImages, thingFiles]).then(function (values) {
-  //   detailsJson = values[0];
-  //   imagesJson = values[1];
-  //   filesJson = values[2];
-
-  //   chrome.storage.local.set({'thingDetails': detailsJson});
-  //   chrome.storage.local.set({'thingImages': imagesJson});
-  //   chrome.storage.local.set({'thingFiles': filesJson});
-  //   saveInfoJson();
-  // });  
 }
 
 /**
  * Save a basic json file with the info needed to display on the extension popup.
  */
 const saveInfoJson = () => {
-  let infoJson = {
-    "id": detailsJson.id,
-    "name": detailsJson.name,
-    "creator_name": detailsJson.creator.name,
-    "creator_img": detailsJson.creator.thumbnail,
-    "creator_link": detailsJson.creator.public_url,
-    "added_date": detailsJson.added,
-    "thumbnail": imagesJson[0]["sizes"][0]["url"],
-    "page_link": detailsJson.public_url,
-    "likes": detailsJson["like_count"],
-    "comments": detailsJson["comment_count"],
-    "collections": detailsJson["collect_count"],
-    "file_count": filesJson.length,
-    "image_count": imagesJson.length,
-  };
-  chrome.storage.local.set({'infoJson': infoJson}, function() {
-    console.log('Info Json saved');
-  });
+  if (detailsJson == undefined || filesJson == undefined || imagesJson == undefined) {
+    storeJson();
+  }
+  else{
+    try{
+      let infoJson = {
+        "id": detailsJson.id,
+        "name": detailsJson.name,
+        "creator_name": detailsJson.creator.name,
+        "creator_img": detailsJson.creator.thumbnail,
+        "creator_link": detailsJson.creator.public_url,
+        "added_date": detailsJson.added,
+        "thumbnail": imagesJson[0]["sizes"][0]["url"],
+        "page_link": detailsJson.public_url,
+        "likes": detailsJson["like_count"],
+        "comments": detailsJson["comment_count"],
+        "collections": detailsJson["collect_count"],
+        "file_count": filesJson.length,
+        "image_count": imagesJson.length,
+      };
+      chrome.storage.local.set({'infoJson': infoJson}, function() {
+        console.log('Info Json saved');
+      });
+    }
+    catch (error) {
+      console.log("Error saving info json. Trying again...");
+      storeJson();
+    }
+  }
 }
 
 const waitForDefaultDownloadButton = () => {

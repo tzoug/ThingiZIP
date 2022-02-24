@@ -2,6 +2,7 @@ let infoJson = {};
 
 document.addEventListener("DOMContentLoaded", function () {
   checkForContentScript();
+  getInformationGithub();
   getInfoJson();
   document.getElementById("download-zip-button").addEventListener("click", sendDownloadZipRequest);
 }, false);
@@ -41,6 +42,50 @@ const checkForContentScript = () => {
     );
   });
 };
+
+/**
+ * Gets information from the json from on Github.
+ */
+const getInformationGithub = () => {
+let xhr = new XMLHttpRequest();
+xhr.open("GET", "https://raw.githubusercontent.com/tzoug/ThingiZIP/main/information.json", true);
+xhr.onreadystatechange = function () {
+  if (xhr.readyState == 4) {
+    if (xhr.status == 200) {
+      let response = JSON.parse(xhr.responseText);
+      let version = response.latest_version;
+      let information = response.info_msg;
+      createVersionBadge(version);
+      document.getElementById("information-text").innerText = information;
+    };
+  }
+};
+xhr.send();
+}
+
+/**
+ * Creates a badge with the latest version of the extension.
+ * Red = version out of date
+ * Green = version up to date
+ * @param {*} version 
+ */
+const createVersionBadge = (version) => {
+  let manifestData = chrome.runtime.getManifest();
+  if (version == manifestData.version) {
+    let badge = document.createElement("span");
+    badge.classList.add("badge");
+    badge.classList.add("bg-success");
+    badge.innerText = "v" + version;
+    document.getElementById("version-container").appendChild(badge);
+  }
+  else{
+    let badge = document.createElement("span");
+    badge.classList.add("badge");
+    badge.classList.add("bg-danger");
+    badge.innerText = "v" + version;
+    document.getElementById("version-container").appendChild(badge);
+  }
+}
 
 /**
  * Send a message to content script asking it to download the zip file.

@@ -166,14 +166,24 @@ const defineEvents = () => {
     .addEventListener("click", function (event) {
       if (!(detailsJson == undefined || imagesJson == undefined || filesJson == undefined)) {
       showLoading();
-      downloadZIP("website");
+        try{
+          downloadZIP("website");
+        }
+        catch(error){
+          hideLoading();
+        }
       }
       else{
         console.log("Not all json files are loaded. Getting them...");
         storeJson();
         setTimeout(() => {
-          showLoading() 
-          downloadZIP()
+          showLoading()
+          try{
+            downloadZIP()
+          }
+          catch(error){
+            sendDownloadCompleteToPopup();
+          }
         } , 1000);
 
       }

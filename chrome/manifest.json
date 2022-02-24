@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "ThingiZIP",
     "description": "A browser extension to easily download files from Thingiverse™.",
-    "version": "2.1",
+    "version": "2.2",
     "icons": {
         "48": "assets/logo/ThingiZIP.png"
     },

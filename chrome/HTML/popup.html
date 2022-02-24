@@ -14,12 +14,14 @@
 
 <body>
   <nav class="navbar navbar-light">
-    <div class="row" style="width: 100%; margin-left: 1px;">
-      <a class="navbar-brand col" href="popup.html">
+    <div class="d-flex justify-content-between" style="width: 100%; margin: 0 5px 0 5px;">
+      <a class="navbar-brand" href="popup.html">
         <img src="../assets/logo/ThingiZIP.png" alt="" width="32" height="32">
       </a>
-      <h4 class="col" style="padding-top: 10px;">ThingiZIP</h4>
-      <p class="col"></p>
+      <h4 style="padding-top: 10px;">ThingiZIP</h4>
+      <div id="version-container" style="margin-top: 10px;">
+        <!-- <span class="badge bg-success">v2.1</span> -->
+      </div>
     </div>
   </nav>
 
@@ -82,7 +84,7 @@
           </span>
         </div>
       </div>
-      <p style="font-size: 9px; font-weight:bold; padding-top: 10px;">Problems? make sure you are running the latest version or leave an issue on GitHub.</p>
+      <p style="font-size: 9px; font-weight:bold; padding-top: 10px;" id="information-text"></p>
     </div>
  </div>
 

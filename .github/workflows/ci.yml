@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: "Build & test"
         run: cd build && ./build.sh
-      - uses: "tzoug/ThingiZIP"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false

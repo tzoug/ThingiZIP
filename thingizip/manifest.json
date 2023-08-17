@@ -1,0 +1,15 @@
+{
+    "name": "ThingiZIP",
+    "description": "A browser extension to easily download files from Thingiverse™",
+    "version": "3.0",
+    "manifest_version": 3,
+    "action": {
+      "default_popup": "src/popup/index.html"
+    },
+    "permissions": ["storage"],
+    "content_scripts": [
+        {
+            "matches": ["https://www.thingiverse.com/thing:*"]
+        }
+    ]
+}

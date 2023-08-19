@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
     import Version from "./version.svelte";
 </script>
 

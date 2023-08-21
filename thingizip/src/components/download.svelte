@@ -40,8 +40,6 @@
     let imagesToDownload = await getDownloadUrls(imagesUrl, DownloadType.Image);
     let downloadUrls = filesToDownload.concat(imagesToDownload);
 
-    console.log(downloadUrls);
-
     await downloadAndZipFiles(downloadUrls, name, descriptionHtml);
   }
 
@@ -49,8 +47,6 @@
     try {
       let response = await fetchData(url);
       let json = JSON.parse(response);
-
-      console.log(json);
 
       let filesToDownload = [];
 

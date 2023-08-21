@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "postbuild": "touch ./dist/src/dummy.css"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.12",
@@ -22,5 +23,12 @@
     "tslib": "^2.6.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10",
+    "axios": "^1.4.0",
+    "file-saver": "^2.0.5",
+    "jszip": "^3.10.1",
+    "jszip-utils": "^0.1.0"
   }
 }

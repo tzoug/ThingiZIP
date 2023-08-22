@@ -1,26 +1,8 @@
 <script>
-  import Welcome from './welcome.svelte';
-  import ThingDetails from './thingDetails.svelte';
-  import { collectDetails } from '../utils/collectDetails';
-  let isFirstLaunch = undefined;
-
-  checkForFirstLaunch();
-  function checkForFirstLaunch() {
-    collectDetails().then((value) => {
-      console.log(value);
-      if (value != null && value != undefined) {
-        isFirstLaunch = false;
-      } else {
-        isFirstLaunch = true;
-      }
-    });
-  }
+  import Home from './home.svelte';
 </script>
 
+<!-- TODO Implement routing -->
 <div class="p-4 mb-6">
-  {#if isFirstLaunch}
-    <Welcome />
-  {:else}
-    <ThingDetails />
-  {/if}
+  <Home />
 </div>

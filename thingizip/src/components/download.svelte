@@ -1,158 +1,66 @@
-<script lang="ts">
-  import JSZip from 'jszip';
-  import JSZipUtils from 'jszip-utils';
-  import { saveAs } from 'file-saver';
-  import { fetchData, getDataFromLocalStorage, convertHtmlToText } from './helpers';
+<script>
+  import { downloadFiles, downloadAll } from './download';
 
-  const downloadFallbackUrl = 'https://www.thingiverse.com/download:';
+  let isDownloading = false;
 
-  interface DownloadInfo {
-    id: string;
-    name: string;
-    url: string;
-    fileType: DownloadType;
-  }
+  async function downloadAllFiles() {
+    isDownloading = true;
 
-  enum DownloadType {
-    File,
-    Image,    
-  }
+    const promise = downloadFiles();
 
-  export async function downloadFiles() {
-    let data = await getDataFromLocalStorage();
-    let name = data['name'];
-
-    let filesUrl = data['files_url'];
-    let downloadUrls = await getDownloadUrls(filesUrl, DownloadType.File);
-    console.log(downloadUrls);
-
-    await downloadAndZipFiles(downloadUrls, `${name}_files`, undefined);
-  }
-
-  export async function downloadAll() {
-    let data = await getDataFromLocalStorage();
-    let name = data['name'];
-    let descriptionHtml = data['description_html'];
-
-    let filesUrl = data['files_url'];
-    let imagesUrl = data['images_url'];
-    let filesToDownload = await getDownloadUrls(filesUrl, DownloadType.File);
-    let imagesToDownload = await getDownloadUrls(imagesUrl, DownloadType.Image);
-    let downloadUrls = filesToDownload.concat(imagesToDownload);
-
-    await downloadAndZipFiles(downloadUrls, name, descriptionHtml);
-  }
-
-  async function getDownloadUrls(url: string, type: DownloadType | null): Promise<DownloadInfo[] | null> {
-    try {
-      let response = await fetchData(url);
-      let json = JSON.parse(response);
-
-      let filesToDownload = [];
-
-      json.forEach(function (item) {
-        let toDownload = getValuesNeedForDownload(item, type);
-
-        if (toDownload == null) {
-          return;
-        }
-
-        filesToDownload.push(toDownload);
+    promise
+      .then(() => {
+        isDownloading = false;
+      })
+      .catch(() => {
+        isDownloading = false;
+        // TODO Display alert
+        // Send log...
       });
-
-      return filesToDownload;
-    } catch (error) {
-      console.error('Error:', error);
-      return null;
-    }
   }
 
-  async function downloadAndZipFiles(
-    toDownload: DownloadInfo[],
-    zipName: string,
-    descriptionHtml: string,
-  ) {
-    const zip = new JSZip();
-    let tempFileNames: string[] = [];
+  async function downloadFull() {
+    isDownloading = true;
 
-    try {      
-      let promises = toDownload.map((obj) => {
-        let data = downloadFile(obj.url);
+    const promise = downloadAll();
 
-        let filename = obj.name;
-        let dirAndFilename = filename;
-        if (obj.fileType == DownloadType.File) {
-          dirAndFilename = `Files/${filename}`;
-        } else if (obj.fileType == DownloadType.Image) {
-          dirAndFilename = `Images/${filename}`;
-        }
-
-        zip.file(dirAndFilename, data, { binary: true });
-        tempFileNames.push(dirAndFilename);
+    promise
+      .then(() => {
+        isDownloading = false;
+      })
+      .catch(() => {
+        isDownloading = false;
+        // TODO Display alert
+        // Send log...
       });
-
-      if (descriptionHtml != undefined) {
-        let description = convertHtmlToText(descriptionHtml);
-        zip.file('Details.txt', description);
-      }
-
-      await Promise.all(promises);
-
-      let zipData = await zip.generateAsync({ type: 'blob' });
-      saveAs(zipData, `${zipName}.zip`);
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  }
-
-  async function downloadFile(url: string) {
-    return new Promise((resolve, reject) => {
-      JSZipUtils.getBinaryContent(url, function (err, data) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      });
-    });
-  }
-
-  function getValuesNeedForDownload(item: {}, fileType: DownloadType | null): DownloadInfo | null {
-    let id = item['id'];
-    if (id == undefined) {
-      return null;
-    }
-
-    let link = undefined;
-
-    if (fileType == DownloadType.File) {
-      link = item['direct_url'];
-      if (link == undefined || link == null) {
-        link = downloadFallbackUrl + item['id'];
-      }
-    } else if (fileType == DownloadType.Image) {
-      link = item['sizes'][12]['url'];
-      if (link == undefined || link == null) {
-        link = downloadFallbackUrl + item['id'];
-      }
-    }
-
-    if(link == undefined || link == null || link == ''){
-      return;
-    }
-
-    let name = item['name'];
-    if (name == undefined || name.trim() == '' || name == null) {
-      name = id;
-    }
-
-    let downloadInfo: DownloadInfo = {
-      id: id,
-      name: name,
-      fileType: fileType,
-      url: link,
-    };
-    
-    return downloadInfo;
   }
 </script>
+
+{#if isDownloading}
+  <button
+    type="button"
+    class="cursor-not-allowed rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 px-5 py-2.5 text-center text-sm font-medium text-white shadow-lg shadow-teal-500/50 hover:bg-gradient-to-br focus:ring-teal-300 dark:shadow-lg dark:shadow-teal-800/80 dark:focus:ring-teal-800">
+    <svg
+      aria-hidden="true"
+      role="status"
+      class="mr-3 inline h-4 w-4 animate-spin text-white"
+      viewBox="0 0 100 101"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+        fill="#E5E7EB" />
+      <path
+        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+        fill="currentColor" />
+    </svg>
+    Downloading
+  </button>
+{:else}
+  <button
+    type="button"
+    on:click={() => downloadFull()}
+    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+    Download Zip
+  </button>
+{/if}

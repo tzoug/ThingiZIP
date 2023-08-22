@@ -1,11 +1,8 @@
 <script lang="ts" async>
   import SkeletonImage from './skeletonImage.svelte';
   import SkeletonCreatorImg from './skeletonCreatorImg.svelte';
-  import Download from './download.svelte';
   import { collectDetails } from './collectDetails';
-
-  let download;
-  const detailsKey = 'thingiverse_details';
+  import Download from './download.svelte';
 
   let name = undefined;
   let fileCount = undefined;
@@ -20,54 +17,33 @@
   let commentCount = undefined;
   let viewCount = undefined;
 
-  function someFunction() {
-    const promise = collectDetails(); // Calling async function without await
+  displayValues();
 
-    promise.then((details) => {      
-      name = details['name'];
-      fileCount = details['file_count'];
-      likeCount = details['like_count'] == undefined ? '-' : details['like_count'];
-      collectCount = details['collect_count'] == undefined ? '-' : details['collect_count'];
-      commentCount = details['comment_count'] == undefined ? '-' : details['comment_count'];
-      viewCount = details['view_count'] == undefined ? '-' : details['view_count'];
-      creatorName = details['creator']['name'];
-      creatorUrl = details['creator']['public_url'];
-      creatorCover = details['creator']['thumbnail'];
-      thumbnail = details['thumbnail'];
-      publicUrl = details['public_url'];
+  function displayValues() {
+    const promise = collectDetails();
 
-      // TODO Formate date string
-      let added = details['added'];
-      let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      addedDate = new Date(added).toLocaleDateString();
-      // You can use the 'details' object here
-    }).catch((error) => {
-      console.error('Error:', error);
-    });
+    promise
+      .then((details) => {
+        name = details['name'];
+        fileCount = details['file_count'];
+        likeCount = details['like_count'] == undefined ? '-' : details['like_count'];
+        collectCount = details['collect_count'] == undefined ? '-' : details['collect_count'];
+        commentCount = details['comment_count'] == undefined ? '-' : details['comment_count'];
+        viewCount = details['view_count'] == undefined ? '-' : details['view_count'];
+        creatorName = details['creator']['name'];
+        creatorUrl = details['creator']['public_url'];
+        creatorCover = details['creator']['thumbnail'];
+        thumbnail = details['thumbnail'];
+        publicUrl = details['public_url'];
+
+        let added = details['added'];
+        let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        addedDate = new Date(added).toLocaleDateString();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
-
-  someFunction();
-  // function getValuesFromStorage(key: string) {
-  //   chrome.storage.local.get([key]).then((result) => {
-  //     let details = result[key];
-  //     name = details['name'];
-  //     fileCount = details['file_count'];
-  //     likeCount = details['like_count'] == undefined ? '-' : details['like_count'];
-  //     collectCount = details['collect_count'] == undefined ? '-' : details['collect_count'];
-  //     commentCount = details['comment_count'] == undefined ? '-' : details['comment_count'];
-  //     viewCount = details['view_count'] == undefined ? '-' : details['view_count'];
-  //     creatorName = details['creator']['name'];
-  //     creatorUrl = details['creator']['public_url'];
-  //     creatorCover = details['creator']['thumbnail'];
-  //     thumbnail = details['thumbnail'];
-  //     publicUrl = details['public_url'];
-
-  //     // TODO Formate date string
-  //     let added = details['added'];
-  //     let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  //     addedDate = new Date(added).toLocaleDateString();
-  //   });
-  // }
 </script>
 
 <div class="flex items-center justify-center">
@@ -85,7 +61,7 @@
               class="object-cover h-11 w-11 items-center justify-center rounded-full drop-shadow-xl shadow-lg shadow-cyan-500/50" />
           </a>
         {/if}
-        <div class="mx-2 flex flex-col">
+        <div class="mx-2 flex flex-col w-[75%]">
           {#if name == undefined}
             <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-40" />
           {:else}
@@ -203,65 +179,7 @@
         {/if}
       </div>
 
-      <!-- Download options -->
-      <div class="relative flex py-1 items-center">
-        <div class="flex-grow border-t border-gray-400" />
-        <!-- TODO Add tooltip next to 'options' -->
-        <!-- <span
-          details-te-toggle="tooltip"
-          title="Download files only or all (files, images)"
-          class="flex-shrink mx-4 text-stone-50 text-sm font-medium duration-150 ease-in-out"
-          >Download Options</span> -->
-        <div class="flex-grow border-t border-gray-400" />
-      </div>
-
-      <div class="flex flex-row w-full justify-around">
-        <div class="inline-flex rounded-md shadow-sm" role="group">
-          <Download bind:this={download} />
-          <button
-            on:click={download.downloadFiles()}
-            type="button"
-            class="disabled grid grid-cols-3 gap-[0.0625rem] items-center px-2 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              class="w-auto h-4">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-            </svg>
-            Files
-            <span
-              class="inline-flex items-center justify-center w-4 h-4 ml-2 text-xs font-semibold text-blue-800 bg-blue-200 rounded-full">
-              {fileCount == undefined ? '-' : fileCount}
-            </span>
-          </button>
-          <button
-            on:click={download.downloadAll()}
-            type="button"
-            class="inline-flex items-center px-2 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-auto h-4 pr-2">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m-6 3.75l3 3m0 0l3-3m-3 3V1.5m6 9h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
-            </svg>
-            Download All
-          </button>
-        </div>
-      </div>
-
-      <div class="h-0.5" />
+      <Download />
     </div>
   </div>
 </div>

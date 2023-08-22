@@ -1,10 +1,10 @@
-const detailsKey = 'thingiverse_details';
+import { AUTH_KEY, DETAILS_KEY } from '../constants';
 
 export async function fetchData(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
-    xhr.setRequestHeader('Authorization', 'Bearer 56edfc79ecf25922b98202dd79a291aa');
+    xhr.setRequestHeader('Authorization', AUTH_KEY);
     xhr.responseType = 'text';
     xhr.onload = function () {
       if (xhr.status === 200) {        
@@ -22,8 +22,8 @@ export async function fetchData(url: string): Promise<string> {
 
 export async function getDataFromLocalStorage() {
   return new Promise((resolve) => {
-    chrome.storage.local.get([detailsKey], function (result) {
-      resolve(result[detailsKey]);
+    chrome.storage.local.get([DETAILS_KEY], function (result) {
+      resolve(result[DETAILS_KEY]);
     });
   });
 }

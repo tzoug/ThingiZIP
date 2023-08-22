@@ -1,5 +1,5 @@
 import { getActiveUrl, getIdFromUrl, fetchData, parseJson, setToStorage } from './helpers';
-import { DETAILS_KEY, BASE_URL, BASE_API_URL } from '../constants';
+import { DETAILS_KEY, BASE_URL, BASE_API_URL } from './constants';
 
 export async function collectDetails() {
   let storageVal = await getDetailsFromStorage();

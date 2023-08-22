@@ -1,6 +1,6 @@
 <script lang="ts">
   import Recent from './recent.svelte';
-  import { collectDetails } from './collectDetails';
+  import { collectDetails } from '../utils/collectDetails';
 
   // Get recents
   //

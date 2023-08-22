@@ -1,4 +1,4 @@
-import { AUTH_KEY, DETAILS_KEY } from '../constants';
+import { AUTH_KEY, DETAILS_KEY } from './constants';
 
 export async function fetchData(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -7,7 +7,7 @@ export async function fetchData(url: string): Promise<string> {
     xhr.setRequestHeader('Authorization', AUTH_KEY);
     xhr.responseType = 'text';
     xhr.onload = function () {
-      if (xhr.status === 200) {        
+      if (xhr.status === 200) {
         resolve(xhr.responseText);
       } else {
         reject(new Error(`Request failed with status: ${xhr.status}`));

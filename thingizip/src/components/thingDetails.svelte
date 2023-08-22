@@ -1,7 +1,7 @@
 <script lang="ts" async>
   import SkeletonImage from './skeletonImage.svelte';
   import SkeletonCreatorImg from './skeletonCreatorImg.svelte';
-  import { collectDetails } from './collectDetails';
+  import { collectDetails } from '../utils/collectDetails';
   import Download from './download.svelte';
 
   let name = undefined;

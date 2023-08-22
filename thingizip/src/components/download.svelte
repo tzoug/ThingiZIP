@@ -1,5 +1,5 @@
 <script>
-  import { downloadFiles, downloadAll } from './download';
+  import { downloadFiles, downloadAll } from '../utils/download';
 
   let isDownloading = false;
 

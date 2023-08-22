@@ -2,7 +2,7 @@ import JSZip from 'jszip';
 import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import { fetchData, getDataFromLocalStorage, convertHtmlToText } from './helpers';
-import { DOWNLOAD_FALLBACK_URL, FILES_DIR, IMAGES_DIR, DESCRIPTION_FILE } from '../constants';
+import { DOWNLOAD_FALLBACK_URL, FILES_DIR, IMAGES_DIR, DESCRIPTION_FILE } from './constants';
 
 interface DownloadInfo {
   id: string;

@@ -1,7 +1,7 @@
 <script>
   import Welcome from './welcome.svelte';
   import ThingDetails from './thingDetails.svelte';
-  import { collectDetails } from './collectDetails';
+  import { collectDetails } from '../utils/collectDetails';
   let isFirstLaunch = undefined;
 
   checkForFirstLaunch();

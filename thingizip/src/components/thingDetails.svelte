@@ -24,6 +24,9 @@
 
     promise
       .then((details) => {
+        if (details == undefined) {
+          return;
+        }
         name = details['name'];
         fileCount = details['file_count'];
         likeCount = details['like_count'] == undefined ? '-' : details['like_count'];

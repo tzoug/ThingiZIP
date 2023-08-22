@@ -14,9 +14,10 @@ export async function collectDetails() {
     }
 
     let data = await fetchData(BASE_API_URL + id);
-    console.log(data);
     let details = parseJson(data);
     setToStorage(DETAILS_KEY, details);
+
+    console.log('Fetched Details', details);
 
     return details;
   } else {

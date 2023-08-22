@@ -3,18 +3,7 @@ import JSZipUtils from 'jszip-utils';
 import { saveAs } from 'file-saver';
 import { fetchData, getDataFromLocalStorage, convertHtmlToText } from './helpers';
 import { DOWNLOAD_FALLBACK_URL, FILES_DIR, IMAGES_DIR, DESCRIPTION_FILE } from './constants';
-
-interface DownloadInfo {
-  id: string;
-  name: string;
-  url: string;
-  fileType: DownloadType;
-}
-
-enum DownloadType {
-  File,
-  Image,
-}
+import { type DownloadInfo, DownloadType } from './data/downloadInfo';
 
 export async function downloadFiles() {
   let data = await getDataFromLocalStorage();

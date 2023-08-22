@@ -1,10 +1,10 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-  import { valueStore } from '../utils/navbarValueStore';
-  import { PageName } from '../utils/data/pageName';
+  import { valueStore } from '../utils/valueStore';
+
   let strokeWidth = 2.5;
 
   function handleClick(value) {
+    console.log(value);
     valueStore.set(value);
   }
 </script>

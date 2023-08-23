@@ -1,7 +1,7 @@
 <script lang="ts" async>
   import SkeletonImage from './skeletonImage.svelte';
   import SkeletonCreatorImg from './skeletonCreatorImg.svelte';
-  import { collectDetails } from '../utils/collectDetails';
+  import { fetchDetails } from '../utils/details';
   import { BadgeType } from '../utils/data/badgeType';
   import Badge from './badge.svelte';
   import Welcome from './welcome.svelte';
@@ -25,7 +25,7 @@
   displayValues();
 
   function displayValues() {
-    const promise = collectDetails();
+    const promise = fetchDetails();
 
     promise
       .then((details) => {

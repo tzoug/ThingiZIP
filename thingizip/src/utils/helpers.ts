@@ -66,7 +66,6 @@ export function getIdFromUrl(url: string) {
 }
 
 export function convertHtmlToText(html: string): string {
-  // TODO Add more obj to details for link, like, etc
   let text = undefined;
   let dom = new DOMParser().parseFromString(html, 'text/html');
   text = dom.body.textContent;
@@ -119,16 +118,16 @@ export function formatTimeDifference(timestamp: number) {
   let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
 
   let result = '';
-  if (years > 0) result += `${years} year${years > 1 ? 's' : ''} `;
-  if (months > 0) result += `${months} month${months > 1 ? 's' : ''} `;
-  if (days > 0) result += `${days} day${days > 1 ? 's' : ''} `;
-  if (hours > 0) result += `${hours} hour${hours > 1 ? 's' : ''} `;
-  if (minutes > 0) result += `${minutes} minute${minutes > 1 ? 's' : ''}`;
+  if (years > 0) result += `> ${years} year${years > 1 ? 's' : ''} `;
+  else if (months > 0) result += `> ${months} month${months > 1 ? 's' : ''} `;
+  else if (days > 0) result += `> ${days} day${days > 1 ? 's' : ''} `;
+  else if (hours > 0) result += `> ${hours} hour${hours > 1 ? 's' : ''} `;
+  else if (minutes > 0) result += `${minutes} minute${minutes > 1 ? 's' : ''} `;
 
   if (result.trim() === '') {
     result = 'just now';
   } else {
-    result += ' ago';
+    result += 'ago';
   }
 
   return result;

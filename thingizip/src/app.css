@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*::-webkit-scollbar {
-  display: none;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 h1 {
   @apply text-4xl font-bold;
 }

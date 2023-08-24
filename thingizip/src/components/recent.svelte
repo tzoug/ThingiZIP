@@ -14,9 +14,24 @@
   type="button"
   class="mb-2 mr-2 w-full inline-flex items-center rounded-lg border border-gray-200 bg-white px-2 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600">
   <div class="flex flex-col w-full">
+    <div class="inline-flex mb-2 h-4 justify-between">
+      <span
+        class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+        <svg
+          class="mr-1.5 h-2.5 w-2.5"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20">
+          <path
+            d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
+        </svg>
+        {timeAgo}
+      </span>
+    </div>
     <div class="inline-flex">
       {#if thumbnail == undefined}
-        <div role="status" class="animate-pulse">
+        <div role="status" class="animate-pulse self-start">
           <div
             class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-300 dark:bg-gray-700">
             <svg
@@ -31,52 +46,21 @@
           </div>
         </div>
       {:else}
-        <div role="status" class="">
+        <div role="status" class="flex-none self-start">
           <img
             src={thumbnail}
             alt="thumbnail"
             class="object-cover flex h-10 w-10 items-center justify-center rounded-md bg-gray-300 dark:bg-gray-700" />
         </div>
       {/if}
-      <div class="ml-2 flex flex-col w-[75%]">
+      <div class="ml-2 flex max-w-[80%] flex-col flex-1">
         <div class="inline-flex items-center justify-between">
           <h5 class="truncate">{name}</h5>
-          <span
-            class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-100 text-sm font-semibold text-gray-800 dark:bg-green-700 dark:text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="2.5"
-              stroke="currentColor"
-              class="h-3 w-3">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-          </span>
         </div>
         <div class="inline-flex">
-          <h5 class="truncate">by {creatorName}</h5>
+          <h5 class="text-sm truncate text-stone-300">by {creatorName}</h5>
         </div>
       </div>
-    </div>
-    <!-- First row -->
-    <div class="inline-flex mt-2">
-      <span
-        class="inline-flex items-center rounded border border-blue-400 bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-gray-700 dark:text-blue-400">
-        <svg
-          class="mr-1.5 h-2.5 w-2.5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor"
-          viewBox="0 0 20 20">
-          <path
-            d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
-        </svg>
-        {timeAgo}
-      </span>
     </div>
   </div>
 </a>

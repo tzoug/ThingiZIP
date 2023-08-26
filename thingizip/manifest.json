@@ -10,6 +10,9 @@
     "storage",
     "tabs"
   ],
+  "icons": {
+    "48": "ThingiZIP.png"
+  },  
   "content_scripts":[
     {
       "matches": ["https://www.thingiverse.com/thing:*"],

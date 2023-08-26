@@ -5,7 +5,7 @@
 </script>
 
 <div
-  class="min-w-[22rem] max-w-lg bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
+  class="min-w-[22rem] min-h-[520px] max-w-lg bg-white border border-gray-200 shadow dark:bg-gray-800 dark:border-gray-700">
   <Heading />
   <Body />
   <Navbar />

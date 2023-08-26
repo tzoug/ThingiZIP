@@ -7,7 +7,7 @@ import { type DownloadInfo, DownloadType } from './data/downloadInfo';
 
 export async function downloadFiles() {
   let data = await getDataFromLocalStorage();
-  let name = data['name'];
+  let name = data['name'].replace(/\s+/g, '_');
 
   let filesUrl = data['files_url'];
   let downloadUrls = await getDownloadUrls(filesUrl, DownloadType.File);
@@ -18,7 +18,7 @@ export async function downloadFiles() {
 
 export async function downloadAll() {
   let data = await getDataFromLocalStorage();
-  let name = data['name'];
+  let name = data['name'].replace(/\s+/g, '_');
   let descriptionHtml = data['description_html'];
 
   let filesUrl = data['files_url'];

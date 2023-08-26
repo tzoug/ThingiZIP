@@ -12,7 +12,7 @@
   href={link}
   target="_blank"
   type="button"
-  class="mb-2 mr-2 w-full inline-flex items-center rounded-lg border border-gray-200 bg-white px-2 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+  class="w-full inline-flex items-center rounded-lg border border-gray-200 bg-white px-2 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600">
   <div class="flex flex-col w-full">
     <div class="inline-flex mb-2 h-4 justify-between">
       <span

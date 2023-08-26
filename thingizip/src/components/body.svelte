@@ -1,6 +1,7 @@
 <script>
   import Home from './home.svelte';
   import RecentsPage from './recentsPage.svelte';
+  import Info from './info.svelte';
   import { valueStore } from '../utils/valueStore';
 </script>
 
@@ -10,6 +11,6 @@
   {:else if $valueStore == 'Recents'}
     <RecentsPage />
   {:else if $valueStore == 'Info'}
-    <h1>Info</h1>
+    <Info />
   {/if}
 </div>

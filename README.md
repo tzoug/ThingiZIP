@@ -42,12 +42,12 @@ Contributions are always welcome!
 
 ## Ressources Used
 
-- [TailwindCSS](https://getbootstrap.com/) : extension popup UI
-- [Svelte](https://icons.getbootstrap.com/) : all icons from extension popup
-- [Heroicons](https://fonts.google.com/specimen/Roboto?query=roboto) : icons
-- [JSZip](https://stuk.github.io/jszip/) : create ZIP files
+- [TailwindCSS](https://tailwindcss.com/) : extension UI
+- [Svelte](https://svelte.dev/) : extension UI
+- [Heroicons](https://heroicons.com/) : icons
+- [JSZip](https://stuk.github.io/jszip/) : create zip files
 - [JSZip Utils](https://github.com/Stuk/jszip-utils) : create zip files
-- [FileSaver](https://github.com/eligrey/FileSaver.js/) : save ZIP files
+- [FileSaver](https://github.com/eligrey/FileSaver.js/) : save zip files
 
 ## Download
 

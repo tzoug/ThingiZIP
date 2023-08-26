@@ -65,14 +65,16 @@ export function getIdFromUrl(url: string) {
   return thingId;
 }
 
-export function convertHtmlToText(html: string): string {
+export function convertHtmlToText(html: string, name: string, url: string): string {
+  let info = `${name}\n${url}`;
+
   let text = undefined;
   let dom = new DOMParser().parseFromString(html, 'text/html');
   text = dom.body.textContent;
   text = text.replace(/<\/?[^>]+(>|$)/g, '');
   text = text.replace(/\s\s+/g, '\n');
 
-  return text;
+  return `${info}\n\n${text}`;
 }
 
 export function parseJson(response: string): Object {

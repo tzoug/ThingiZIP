@@ -7,19 +7,21 @@ import { type DownloadInfo, DownloadType } from './data/downloadInfo';
 
 export async function downloadFiles() {
   let data = await getDataFromLocalStorage();
-  let name = data['name'].replace(/\s+/g, '_');
+  let name = data['name'];
+  let url = data['public_url'];
 
   let filesUrl = data['files_url'];
   let downloadUrls = await getDownloadUrls(filesUrl, DownloadType.File);
   console.log(downloadUrls);
 
-  await downloadAndZipFiles(downloadUrls, `${name}_files`, undefined);
+  await downloadAndZipFiles(downloadUrls, name, undefined, url, DownloadType.File);
 }
 
 export async function downloadAll() {
   let data = await getDataFromLocalStorage();
-  let name = data['name'].replace(/\s+/g, '_');
+  let name = data['name'];
   let descriptionHtml = data['description_html'];
+  let url = data['public_url'];
 
   let filesUrl = data['files_url'];
   let imagesUrl = data['images_url'];
@@ -27,7 +29,7 @@ export async function downloadAll() {
   let imagesToDownload = await getDownloadUrls(imagesUrl, DownloadType.Image);
   let downloadUrls = filesToDownload.concat(imagesToDownload);
 
-  await downloadAndZipFiles(downloadUrls, name, descriptionHtml);
+  await downloadAndZipFiles(downloadUrls, name, descriptionHtml, url, DownloadType.All);
 }
 
 async function getDownloadUrls(
@@ -59,8 +61,10 @@ async function getDownloadUrls(
 
 async function downloadAndZipFiles(
   toDownload: DownloadInfo[],
-  zipName: string,
+  name: string,
   descriptionHtml: string,
+  url: string,
+  type: DownloadType,
 ) {
   const zip = new JSZip();
   let tempFileNames: string[] = [];
@@ -82,13 +86,19 @@ async function downloadAndZipFiles(
     });
 
     if (descriptionHtml != undefined) {
-      let description = convertHtmlToText(descriptionHtml);
+      let description = convertHtmlToText(descriptionHtml, name, url);
       zip.file(DESCRIPTION_FILE, description);
     }
 
     await Promise.all(promises);
 
     let zipData = await zip.generateAsync({ type: 'blob' });
+    let zipName = name.replace(/\s+/g, '_');
+
+    if (type == DownloadType.File) {
+      zipName += '_Files';
+    }
+
     saveAs(zipData, `${zipName}.zip`);
   } catch (error) {
     console.error('An error occurred:', error);

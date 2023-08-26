@@ -1,6 +1,10 @@
-<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Welcome!</h5>
-<p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
-  Visit a Thingiverse page to start downloading files using ThingiZip.
+<h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Welcome!</h5>
+<p class="mb-3 font-normal text-gray-400">
+  To start downloading files with ThingiZip, you must visit a valid Thingiverse page.<br />
+  A valid page looks like:<br />
+  <code class="bg-gray-200 text-black rounded-sm p-0.5">
+    https://www.thingiverse.com/thing:6145551
+  </code>
 </p>
 
 <div class="inline-flex justify-between min-w-full">
@@ -8,14 +12,14 @@
     href="https://www.thingiverse.com/"
     target="_blank"
     type="button"
-    class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
+    class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-blue-800 shadow-lg shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
     Visit Thingiverse
   </a>
   <a
     href="https://github.com/tzoug/ThingiZIP"
     target="_blank"
     type="button"
-    class="text-white bg-stone-950 hover:bg-stone-950 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-0 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 mr-2 mb-2">
+    class="rounded-lg bg-gradient-to-r from-gray-800 via-gray-900 to-stone-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br focus:outline-none focus:ring-2 shadow-lg shadow-gray-700 focus:ring-blue-800">
     <svg
       class="w-4 h-4"
       aria-hidden="true"
@@ -28,4 +32,35 @@
         clip-rule="evenodd" />
     </svg>
   </a>
+</div>
+
+<!-- Ressources -->
+<div class="mb-2 mt-5">
+  <h5 class="text-lg font-medium text-white">Ressources</h5>
+</div>
+<div class="w-full rounded-lg border border-b border-gray-600 bg-gray-700 text-white">
+  <a
+    href="https://tailwindcss.com/"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center rounded-t-lg px-4 py-2 text-sm border-b font-medium border-gray-600 hover:bg-gray-600"
+    >Tailwind CSS</a>
+  <a
+    href="https://svelte.dev/"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center px-4 py-2 text-sm font-medium border-b border-gray-600 hover:bg-gray-600"
+    >Svelte</a>
+  <a
+    href="https://github.com/Stuk/jszip"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center px-4 py-2 text-sm font-medium border-b border-gray-600 hover:bg-gray-600"
+    >JSZip</a>
+  <a
+    href="https://github.com/eligrey/FileSaver.js"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center rounded-b-lg px-4 py-2 text-sm font-medium border-gray-600 hover:bg-gray-600"
+    >FileSaver.js</a>
 </div>

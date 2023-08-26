@@ -12,11 +12,11 @@
   href={link}
   target="_blank"
   type="button"
-  class="w-full inline-flex items-center rounded-lg border border-gray-200 bg-white px-2 py-2.5 text-center text-sm font-medium text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+  class="w-full inline-flex items-center rounded-lg border px-2 py-2.5 text-center text-sm font-medium focus:outline-none border-gray-700 bg-gray-800 text-white hover:bg-gray-700 focus:ring-gray-600">
   <div class="flex flex-col w-full">
     <div class="inline-flex mb-2 h-4 justify-between">
       <span
-        class="bg-gray-100 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 dark:bg-gray-700 dark:text-gray-400 border border-gray-500">
+        class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2 bg-gray-700 text-gray-400 border border-gray-500">
         <svg
           class="mr-1.5 h-2.5 w-2.5"
           aria-hidden="true"
@@ -32,10 +32,9 @@
     <div class="inline-flex">
       {#if thumbnail == undefined}
         <div role="status" class="animate-pulse self-start">
-          <div
-            class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-300 dark:bg-gray-700">
+          <div class="flex h-10 w-10 items-center justify-center rounded-md bg-gray-700">
             <svg
-              class="h-5 w-5 text-gray-200 dark:text-gray-600"
+              class="h-5 w-5 text-gray-600"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -50,7 +49,7 @@
           <img
             src={thumbnail}
             alt="thumbnail"
-            class="object-cover flex h-10 w-10 items-center justify-center rounded-md bg-gray-300 dark:bg-gray-700" />
+            class="object-cover flex h-10 w-10 items-center justify-center rounded-md bg-gray-700" />
         </div>
       {/if}
       <div class="ml-2 flex max-w-[80%] flex-col flex-1">

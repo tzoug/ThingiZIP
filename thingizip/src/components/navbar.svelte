@@ -10,15 +10,15 @@
 </script>
 
 <div
-  class="fixed z-50 w-[60%] h-8 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-1 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+  class="fixed z-50 w-[60%] h-8 max-w-lg -translate-x-1/2 border rounded-full bottom-1 left-1/2 bg-gray-700 border-gray-600">
   <div class="grid h-full max-w-lg grid-cols-3 mx-auto">
     <button
       on:click={() => handleClick('Home')}
       data-tooltip-target="tooltip-home"
       type="button"
-      class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+      class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-800 group">
       <svg
-        class="w-auto h-4 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        class="w-auto h-4 text-gray-400 group-hover:text-blue-500"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -35,7 +35,7 @@
     <div
       id="tooltip-home"
       role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700">
       Home
       <div class="tooltip-arrow" data-popper-arrow />
     </div>
@@ -43,9 +43,9 @@
       on:click={() => handleClick('Recents')}
       data-tooltip-target="tooltip-recents"
       type="button"
-      class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+      class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-800 group">
       <svg
-        class="w-auto h-4 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        class="w-auto h-4 text-gray-400 group-hover:text-blue-500"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -62,7 +62,7 @@
     <div
       id="tooltip-recents"
       role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700">
       Recently Viewed
       <div class="tooltip-arrow" data-popper-arrow />
     </div>
@@ -70,9 +70,9 @@
       on:click={() => handleClick('Info')}
       data-tooltip-target="tooltip-info"
       type="button"
-      class="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+      class="inline-flex flex-col items-center justify-center px-5 rounded-r-full hover:bg-gray-800 group">
       <svg
-        class="w-auto h-4 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+        class="w-auto h-4 text-gray-400 group-hover:text-blue-500"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -89,7 +89,7 @@
     <div
       id="tooltip-info"
       role="tooltip"
-      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+      class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-gray-700">
       Information
       <div class="tooltip-arrow" data-popper-arrow />
     </div>

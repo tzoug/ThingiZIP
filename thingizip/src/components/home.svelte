@@ -77,12 +77,12 @@
           {/if}
           <div class="mx-2 flex flex-col w-[75%]">
             {#if name == undefined}
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 w-40" />
+              <div class="h-2 rounded-full bg-gray-700 w-40" />
             {:else}
               <h4 class="text-sm font-bold truncate text-zinc-50">{name}</h4>
             {/if}
             {#if creatorName == undefined}
-              <div class="h-2 mt-2 bg-gray-200 rounded-full dark:bg-gray-700 w-40" />
+              <div class="h-2 mt-2 rounded-full bg-gray-700 w-40" />
             {:else}
               <h5 class="text-xs/3 font-bold truncate text-zinc-400">
                 by {creatorName}

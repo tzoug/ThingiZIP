@@ -1,8 +1,12 @@
-<div
-  class="w-full rounded-lg border border-gray-200 bg-white text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
-  <button
+<div class="mb-2">
+  <h5 class="text-lg font-medium text-white">Quick Access</h5>
+</div>
+<div class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white">
+  <a
+    href="https://www.thingiverse.com/"
+    target="_blank"
     type="button"
-    class="relative inline-flex w-full items-center rounded-t-lg border-b border-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:text-white dark:focus:ring-gray-500">
+    class="relative inline-flex w-full items-center rounded-t-lg border-b px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 border-gray-600 hover:bg-gray-600 hover:text-white focus:text-white focus:ring-gray-500">
     <svg
       class="mr-2.5 h-3 w-3"
       aria-hidden="true"
@@ -15,10 +19,12 @@
         fill="#fff" />
     </svg>
     Visit Thingiverse
-  </button>
-  <button
+  </a>
+  <a
+    href="https://github.com/tzoug/ThingiZIP"
+    target="_blank"
     type="button"
-    class="relative inline-flex w-full items-center border-b border-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:text-white dark:focus:ring-gray-500">
+    class="relative inline-flex w-full items-center border-b px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 border-gray-600 hover:bg-gray-600 hover:text-white focus:text-white focus:ring-gray-500">
     <svg
       class="mr-2.5 h-3 w-3"
       aria-hidden="true"
@@ -32,10 +38,12 @@
         fill="#fff" />
     </svg>
     Visit Github
-  </button>
-  <button
+  </a>
+  <a
+    href="https://chrome.google.com/webstore/detail/thingizip/maonfmeilcpjfdipacfehiidjngcoama"
+    target="_blank"
     type="button"
-    class="relative inline-flex w-full items-center border-b border-gray-200 px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:text-white dark:focus:ring-gray-500">
+    class="relative inline-flex w-full items-center border-b px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 border-gray-600 hover:bg-gray-600 hover:text-white focus:text-white focus:ring-gray-500">
     <svg
       class="mr-2.5 h-3 w-3"
       version="1.1"
@@ -118,10 +126,10 @@
       </g>
     </svg>
     Chrome Web Store
-  </button>
+  </a>
   <button
     type="button"
-    class="relative inline-flex w-full items-center rounded-b-lg px-4 py-2 text-sm font-medium hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:text-blue-700 focus:ring-2 focus:ring-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:text-white dark:focus:ring-gray-500">
+    class="relative inline-flex w-full items-center rounded-b-lg px-4 py-2 text-sm font-medium focus:z-10 focus:ring-2 border-gray-600 hover:bg-gray-600 hover:text-white focus:text-white focus:ring-gray-500">
     <svg
       class="mr-2.5 h-3 w-3"
       aria-hidden="true"
@@ -344,9 +352,37 @@
     Firefox Addon Store
   </button>
 </div>
-<svg
-  width="77.42"
-  height="79.97"
-  version="1.1"
-  viewBox="0 0 77.42 79.97"
-  xmlns="http://www.w3.org/2000/svg" />
+<!-- Ressources -->
+<div class="mb-2 mt-5">
+  <h5 class="text-lg font-medium text-white">Ressources</h5>
+</div>
+<div class="w-full rounded-lg border broder-b border-gray-600 bg-gray-700 text-white">
+  <a
+    href="https://tailwindcss.com/"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center rounded-t-lg px-4 py-2 text-sm border-b font-medium border-gray-600 hover:bg-gray-600"
+    >Tailwind CSS
+  </a>
+  <a
+    href="https://svelte.dev/"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center px-4 py-2 text-sm font-medium border-b border-gray-600 hover:bg-gray-600"
+    >Svelte
+  </a>
+  <a
+    href="https://github.com/Stuk/jszip"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center px-4 py-2 text-sm font-medium border-b border-gray-600 hover:bg-gray-600"
+    >JSZip
+  </a>
+  <a
+    href="https://github.com/eligrey/FileSaver.js"
+    target="_blank"
+    type="button"
+    class="relative inline-flex w-full items-center rounded-b-lg px-4 py-2 text-sm font-medium border-gray-600 hover:bg-gray-600"
+    >FileSaver.js
+  </a>
+</div>

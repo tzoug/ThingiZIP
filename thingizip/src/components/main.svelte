@@ -1,0 +1,11 @@
+<script lang="ts">
+  import Heading from './heading.svelte';
+  import Body from './body.svelte';
+  import Navbar from './navbar.svelte';
+</script>
+
+<div class="min-w-[22rem] min-h-[520px] max-w-lg border shadow bg-gray-800 border-gray-700">
+  <Heading />
+  <Body />
+  <Navbar />
+</div>

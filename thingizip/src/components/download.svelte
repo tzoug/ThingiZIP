@@ -29,8 +29,6 @@
       })
       .catch(() => {
         isDownloadingAll = false;
-        // TODO Display alert
-        // Send log...
       });
   }
 </script>

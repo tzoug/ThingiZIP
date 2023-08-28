@@ -1,5 +1,5 @@
 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Welcome!</h5>
-<p class="mb-3 font-normal text-gray-400">
+<p class="mb-3 font-normal text-gray-400 text-xs">
   To start downloading files with ThingiZip, you must visit a valid Thingiverse page.<br />
   A valid page looks like:<br />
   <code class="bg-gray-200 text-black rounded-sm p-0.5">

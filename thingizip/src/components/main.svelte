@@ -4,7 +4,7 @@
   import Navbar from './navbar.svelte';
 </script>
 
-<div class="min-w-[22rem] min-h-[520px] max-w-lg border shadow bg-gray-800 border-gray-700">
+<div class="w-[22rem] h-[33rem] max-w-lg border shadow bg-gray-800 border-gray-700">
   <Heading />
   <Body />
   <Navbar />

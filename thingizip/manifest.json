@@ -8,7 +8,7 @@
   },
   "permissions": [
     "storage",
-    "tabs"
+    "activeTab"
   ],
   "icons": {
     "48": "ThingiZIP.png"

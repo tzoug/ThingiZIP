@@ -1,0 +1,73 @@
+name: ThingiZip Release
+on:
+  push:
+    tags:
+    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18  # You can change this to your desired Node.js version
+
+      - name: Install Dependencies and Build
+        working-directory: ./thingizip  # Change this to your project directory
+        run: |
+          npm install
+          npm run build
+
+      - name: Create Chrome Zip
+        working-directory: ./thingizip/dist  # Change this to your dist directory
+        run: zip -r thingizip-chrome.zip .
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Modify manifest.json for Firefox
+        working-directory: ./thingizip/dist/  # Change this to your dist directory
+        run: |
+          jq '. += {"browser_specific_settings": { "gecko": { "id": "{59085801-0630-4e97-9c51-8d15d04d4527}", "strict_min_version": "65.0" } } }' manifest.json > temp-manifest.json
+          mv temp-manifest.json manifest.json          
+
+      - name: Create Firefox Zip
+        working-directory: ./thingizip/dist  # Change this to your dist directory
+        run: zip -r thingizip-firefox.zip . -x thingizip-chrome.zip
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          
+      - name: Upload Chrome Zip Asset        
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./thingizip/dist/thingizip-chrome.zip
+          asset_name: thingizip-chrome.zip
+          asset_content_type: application/zip 
+          
+      - name: Upload Firefox Zip Asset        
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./thingizip/dist/thingizip-firefox.zip
+          asset_name: thingizip-firefox.zip
+          asset_content_type: application/zip

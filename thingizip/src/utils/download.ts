@@ -12,7 +12,6 @@ export async function downloadFiles() {
 
   let filesUrl = data['files_url'];
   let downloadUrls = await getDownloadUrls(filesUrl, DownloadType.File);
-  console.log(downloadUrls);
 
   await downloadAndZipFiles(downloadUrls, name, undefined, url, DownloadType.File);
 }
@@ -36,27 +35,22 @@ async function getDownloadUrls(
   url: string,
   type: DownloadType | null,
 ): Promise<DownloadInfo[] | null> {
-  try {
-    let response = await fetchData(url);
-    let json = JSON.parse(response);
+  let response = await fetchData(url);
+  let json = JSON.parse(response);
 
-    let filesToDownload = [];
+  let filesToDownload = [];
 
-    json.forEach(function (item) {
-      let toDownload = getValuesNeedForDownload(item, type);
+  json.forEach(function (item) {
+    let toDownload = getValuesNeedForDownload(item, type);
 
-      if (toDownload == null) {
-        return;
-      }
+    if (toDownload == null) {
+      return;
+    }
 
-      filesToDownload.push(toDownload);
-    });
+    filesToDownload.push(toDownload);
+  });
 
-    return filesToDownload;
-  } catch (error) {
-    console.error('Error:', error);
-    return null;
-  }
+  return filesToDownload;
 }
 
 async function downloadAndZipFiles(
@@ -69,40 +63,35 @@ async function downloadAndZipFiles(
   const zip = new JSZip();
   let tempFileNames: string[] = [];
 
-  try {
-    let promises = toDownload.map((obj) => {
-      let data = downloadFile(obj.url);
+  let promises = toDownload.map((obj) => {
+    let data = downloadFile(obj.url);
 
-      let filename = obj.name;
-      let dirAndFilename = filename;
-      if (obj.fileType == DownloadType.File) {
-        dirAndFilename = `${FILES_DIR}/${filename}`;
-      } else if (obj.fileType == DownloadType.Image) {
-        dirAndFilename = `${IMAGES_DIR}/${filename}`;
-      }
-
-      zip.file(dirAndFilename, data, { binary: true });
-      tempFileNames.push(dirAndFilename);
-    });
-
-    if (descriptionHtml != undefined) {
-      let description = convertHtmlToText(descriptionHtml, name, url);
-      zip.file(DESCRIPTION_FILE, description);
+    let filename = obj.name;
+    let dirAndFilename = filename;
+    if (obj.fileType == DownloadType.File) {
+      dirAndFilename = `${FILES_DIR}/${filename}`;
+    } else if (obj.fileType == DownloadType.Image) {
+      dirAndFilename = `${IMAGES_DIR}/${filename}`;
     }
+    zip.file(dirAndFilename, data, { binary: true });
+    tempFileNames.push(dirAndFilename);
+  });
 
-    await Promise.all(promises);
-
-    let zipData = await zip.generateAsync({ type: 'blob' });
-    let zipName = name.replace(/\s+/g, '_');
-
-    if (type == DownloadType.File) {
-      zipName += '_Files';
-    }
-
-    saveAs(zipData, `${zipName}.zip`);
-  } catch (error) {
-    console.error('An error occurred:', error);
+  if (descriptionHtml != undefined) {
+    let description = convertHtmlToText(descriptionHtml, name, url);
+    zip.file(DESCRIPTION_FILE, description);
   }
+
+  await Promise.all(promises);
+
+  let zipData = await zip.generateAsync({ type: 'blob' });
+  let zipName = name.replace(/\s+/g, '_');
+
+  if (type == DownloadType.File) {
+    zipName += '_Files';
+  }
+
+  saveAs(zipData, `${zipName}.zip`);
 }
 
 async function downloadFile(url: string) {

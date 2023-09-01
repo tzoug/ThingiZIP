@@ -2,7 +2,10 @@
   import { downloadFiles, downloadAll } from '../utils/download';
 
   let isDownloadingFiles = false;
+  let isFileDownloadError = false;
+  
   let isDownloadingAll = false;
+  let isDownloadAllError = false;
 
   async function downloadAllFiles() {
     isDownloadingFiles = true;
@@ -15,6 +18,11 @@
       })
       .catch(() => {
         isDownloadingFiles = false;
+
+        isFileDownloadError = true;
+        setTimeout(function(){
+          isFileDownloadError = false;
+        }, 2500);
       });
   }
 
@@ -29,11 +37,16 @@
       })
       .catch(() => {
         isDownloadingAll = false;
+
+        isDownloadAllError = true;
+        setTimeout(function(){
+          isDownloadAllError = false;
+        }, 2500);
       });
   }
 </script>
 
-{#if isDownloadingFiles}
+{#if isDownloadingFiles && !isFileDownloadError}
   <button
     type="button"
     class="cursor-not-allowed rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br shadow-lg shadow-teal-800/80 focus:ring-teal-800">
@@ -52,6 +65,12 @@
         fill="currentColor" />
     </svg>
     Downloading
+  </button>
+{:else if isFileDownloadError}
+  <button
+    type="button"  
+    class="cursor-not-allowed text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-red-800 shadow-lg shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+    An Error Has Occurred
   </button>
 {:else}
   <button
@@ -62,7 +81,7 @@
   </button>
 {/if}
 
-{#if isDownloadingAll}
+{#if isDownloadingAll && !isDownloadAllError}
   <button
     type="button"
     class="cursor-not-allowed rounded-lg bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gradient-to-br shadow-lg shadow-teal-800/80 focus:ring-teal-800">
@@ -81,6 +100,12 @@
         fill="currentColor" />
     </svg>
     Downloading
+  </button>
+{:else if isDownloadAllError}
+  <button
+    type="button"
+    class="cursor-not-allowed text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-2 focus:outline-none focus:ring-red-800 shadow-lg shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+    An Error Has Occurred
   </button>
 {:else}
   <button

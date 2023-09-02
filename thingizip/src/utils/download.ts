@@ -94,7 +94,7 @@ async function downloadAndZipFiles(
   saveAs(zipData, `${zipName}.zip`);
 }
 
-async function downloadFile(url: string) {
+async function downloadFile(url: string): Promise<null> {
   return new Promise((resolve, reject) => {
     JSZipUtils.getBinaryContent(url, function (err, data) {
       if (err) {

@@ -46,11 +46,21 @@ export function setToStorage(key: string, value: object | string) {
 
 export function getActiveUrl(): Promise<string> {
   return new Promise((resolve) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length > 0) {
-        let activeTab = tabs[0];
-        resolve(activeTab.url);
+    chrome.permissions.contains({
+      permissions: ['activeTab'],    
+    }, (result) => {
+      if (result) {
+        console.log("has perm");
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          if (tabs.length > 0) {
+            let activeTab = tabs[0];
+            resolve(activeTab.url);
+          } else {
+            resolve(undefined);
+          }
+        });        
       } else {
+        console.log("no perm");
         resolve(undefined);
       }
     });

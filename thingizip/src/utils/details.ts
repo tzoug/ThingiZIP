@@ -9,12 +9,18 @@ import {
 } from './helpers';
 import { DETAILS_KEY, BASE_URL, BASE_API_URL, RECENTS_KEY, MAX_RECENTS } from './constants';
 
-export async function fetchDetails() {
+export async function fetchDetails(link?: string | undefined) {
   let currentDetails = await getFromStorage(DETAILS_KEY);
-  let activeUrl = await getActiveUrl();
+  let url = undefined;
 
-  if (activeUrl.startsWith(BASE_URL)) {
-    let id = getIdFromUrl(activeUrl);
+  if(link != undefined){
+    url = link;
+  }else{
+    url = await getActiveUrl();
+  }
+
+  if (url != undefined && url.startsWith(BASE_URL)) {
+    let id = getIdFromUrl(url);
 
     let storageHasValue = doesStorageHaveValue(currentDetails);
 
@@ -47,6 +53,7 @@ export async function fetchDetails() {
 
     return newDetails;
   } else {
+
     // No need to re-fetch data if we're already on the last page that was visited
     if (currentDetails != undefined) {
       return currentDetails;

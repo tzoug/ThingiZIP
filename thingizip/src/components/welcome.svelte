@@ -3,28 +3,58 @@
   import { BASE_URL } from '../utils/constants';
 
   let manualInputVal;
-  let isAccessGranted; 
+  let isAccessGranted: boolean;
 
-  chrome.permissions.contains({
-    permissions: ['activeTab'],
-  }, (result) => {
-    if (result) {
-      isAccessGranted = true;
-    } else {
-      isAccessGranted = false;
-    }
-  });
+  getPermission();
+  
+  function getPermission(){
+    getActiveTabPermission().then((result) => {
+      isAccessGranted = result;
+    })
+  }
 
-  function requestPermission(){  
-    chrome.permissions.request({
+  function getActiveTabPermission(): Promise<boolean>{
+    return new Promise((resolve) =>{
+      chrome.permissions.contains({
       permissions: ['activeTab']
-    }, (granted) => {
-      if (granted) {
-        isAccessGranted = true;
-      } else {
-        isAccessGranted = false;
-      }
-    });  
+      }, (result) => {
+        if (result) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  }
+
+  function toggleActiveTabPermission(){
+    getPermission();
+
+    if(isAccessGranted){
+      chrome.permissions.remove({
+        permissions: ['activeTab']
+      }, (removed) => {
+        if (removed) {
+          // The permissions have been removed.
+        } else {
+          // The permissions have not been removed (e.g., you tried to remove
+          // required permissions).
+        }
+      });
+    }
+    else{
+      chrome.permissions.request({
+      permissions: ['activeTab']
+      }, (granted) => {
+        if (granted) {
+          // Granted
+        } else {
+          // Not granted
+        }
+      });  
+    }
+
+    getPermission();
   }
 
   function search(){
@@ -64,13 +94,11 @@
     <p class="mb-1 text-xs font-normal text-gray-400">A valid page looks like:</p>
     <code class="rounded-sm bg-gray-200 p-0.5 text-xs text-black">https://www.thingiverse.com/thing:6145551</code>
 
-    <button on:click={() => requestPermission()} type="button" class="mt-2 rounded-lg bg-gradient-to-r from-green-500 via-green-600 to-green-700 px-4 py-1.5 text-center text-sm font-medium text-white shadow-lg shadow-green-800/80 hover:bg-gradient-to-br focus:outline-none focus:ring-2 focus:ring-green-800"> 
-      {#if isAccessGranted}
-        Access Granted
-      {:else}
-        Grant Access 
-      {/if}
-    </button>
+    {#if isAccessGranted}
+    <button type="button" on:click={toggleActiveTabPermission} class="mt-2 rounded-lg bg-gradient-to-r from-red-500 via-red-600 to-red-700 px-4 py-1.5 text-center text-sm font-medium text-white shadow-lg shadow-red-800/80 hover:bg-gradient-to-br">Revoke Access</button>
+    {:else}
+      <button type="button" on:click={toggleActiveTabPermission} class="mt-2 rounded-lg bg-gradient-to-r from-green-500 via-green-600 to-green-700 px-4 py-1.5 text-center text-sm font-medium text-white shadow-lg shadow-green-800/80 hover:bg-gradient-to-br">Grant Access</button>
+    {/if}
   </div>
 
   <!-- Manual -->

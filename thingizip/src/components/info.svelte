@@ -1,23 +1,30 @@
 <script lang="ts">
-  let isAccessGranted: boolean = getActiveTabPermission();
-  console.log(isAccessGranted)
+  let isAccessGranted: boolean;
 
-  function getActiveTabPermission(): boolean{
-    chrome.permissions.contains({
+  getPermission();
+  
+  function getPermission(){
+    getActiveTabPermission().then((result) => {
+      isAccessGranted = result;
+    })
+  }
+
+  function getActiveTabPermission(): Promise<boolean>{
+    return new Promise((resolve) =>{
+      chrome.permissions.contains({
       permissions: ['activeTab']
-    }, (result) => {
-      if (result) {
-        return true;
-      } else {
-        return false;
-      }
+      }, (result) => {
+        if (result) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
     });
-    
-    return false;
   }
 
   function toggleActiveTabPermission(){
-    isAccessGranted = getActiveTabPermission();
+    getPermission();
 
     if(isAccessGranted){
       chrome.permissions.remove({
@@ -43,7 +50,7 @@
       });  
     }
 
-    isAccessGranted = getActiveTabPermission();
+    getPermission();
   }
 
 </script>

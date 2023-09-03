@@ -12,7 +12,7 @@
   function getActiveTabPermission(): Promise<boolean>{
     return new Promise((resolve) =>{
       chrome.permissions.contains({
-      permissions: ['activeTab']
+        permissions: ['activeTab']
       }, (result) => {
         if (result) {
           resolve(true);
@@ -40,7 +40,7 @@
     }
     else{
       chrome.permissions.request({
-      permissions: ['activeTab']
+        permissions: ['activeTab']
       }, (granted) => {
         if (granted) {
           // Granted

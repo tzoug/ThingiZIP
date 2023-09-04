@@ -40,7 +40,7 @@ export async function getDataFromLocalStorage() {
 
 export function setToStorage(key: string, value: object | string) {
   chrome.storage.local.set({ [key]: value }).then(() => {
-    console.log('Set to storage', value);
+    // Set to storage
   });
 }
 
@@ -93,7 +93,6 @@ export function getActiveUrl(): Promise<string> {
       permissions: ['activeTab'],    
     }, (result) => {
       if (result) {
-        console.log("has perm");
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
           if (tabs.length > 0) {
             let activeTab = tabs[0];
@@ -103,7 +102,6 @@ export function getActiveUrl(): Promise<string> {
           }
         });        
       } else {
-        console.log("no perm");
         resolve(undefined);
       }
     });

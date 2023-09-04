@@ -4,7 +4,6 @@
   let strokeWidth = 2.5;
 
   function handleClick(value) {
-    console.log(value);
     valueStore.set(value);
   }
 </script>

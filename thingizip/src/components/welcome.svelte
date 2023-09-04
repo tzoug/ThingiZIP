@@ -39,8 +39,6 @@
         location.reload();
         return;
       }
-
-      console.log("not found?")
     }).catch((error) => {
       console.log("Error:", error);
     })

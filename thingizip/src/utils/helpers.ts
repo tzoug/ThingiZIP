@@ -40,16 +40,67 @@ export async function getDataFromLocalStorage() {
 
 export function setToStorage(key: string, value: object | string) {
   chrome.storage.local.set({ [key]: value }).then(() => {
-    console.log('Set to storage', value);
+    // Set to storage
+  });
+}
+
+////////////////////////////
+// Permissions
+////////////////////////////
+
+export function getActiveTabPermission(): Promise<boolean>{
+  return new Promise((resolve) =>{
+    chrome.permissions.contains({
+      permissions: ['activeTab']
+    }, (result) => {
+      if (result) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  });
+}
+
+export function removeActiveTabPermission(){
+  chrome.permissions.remove({
+    permissions: ['activeTab']
+  }, (removed) => {
+    if (removed) {
+      // The permissions have been removed.
+    } else {
+      // The permissions have not been removed (e.g., you tried to remove
+      // required permissions).
+    }
+  });
+}
+
+export function requestActiveTabPermission(){
+  chrome.permissions.request({
+    permissions: ['activeTab']
+  }, (granted) => {
+    if (granted) {
+      // Granted
+    } else {
+      // Not granted
+    }
   });
 }
 
 export function getActiveUrl(): Promise<string> {
   return new Promise((resolve) => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      if (tabs.length > 0) {
-        let activeTab = tabs[0];
-        resolve(activeTab.url);
+    chrome.permissions.contains({
+      permissions: ['activeTab'],    
+    }, (result) => {
+      if (result) {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+          if (tabs.length > 0) {
+            let activeTab = tabs[0];
+            resolve(activeTab.url);
+          } else {
+            resolve(undefined);
+          }
+        });        
       } else {
         resolve(undefined);
       }

@@ -4,7 +4,6 @@
 
   let recents: Object[];
   getRecentsFromStorage().then((res) => {
-    console.log(res);
     recents = res;
   });
 </script>

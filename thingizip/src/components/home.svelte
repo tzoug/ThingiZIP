@@ -6,11 +6,12 @@
   import Badge from './badge.svelte';
   import Welcome from './welcome.svelte';
   import Download from './download.svelte';
+  import { BASE_URL } from '../utils/constants';
 
   let isFirstLaunch = undefined;
+  let manualInputVal = undefined;
 
   let name = undefined;
-  let fileCount = undefined;
   let creatorName = undefined;
   let creatorCover = undefined;
   let addedDate = undefined;
@@ -22,46 +23,69 @@
   let commentCount = undefined;
   let viewCount = undefined;
 
-  displayValues();
+  getCurrentDetails();
 
-  function displayValues() {
-    const promise = fetchDetails();
+  function getCurrentDetails() {
+    let promise;
+    
+    if(manualInputVal != undefined && manualInputVal.startsWith(BASE_URL)){
+      promise = fetchDetails(manualInputVal);
+    }
+    else{
+      promise = fetchDetails(undefined);
+    }
 
     promise
       .then((details) => {
-        if (details != null && details != undefined) {
-          isFirstLaunch = false;
-
-          name = details['name'];
-          fileCount = details['file_count'];
-          likeCount = details['like_count'] == undefined ? '-' : details['like_count'];
-          collectCount = details['collect_count'] == undefined ? '-' : details['collect_count'];
-          commentCount = details['comment_count'] == undefined ? '-' : details['comment_count'];
-          viewCount = details['view_count'] == undefined ? '-' : details['view_count'];
-          creatorName = details['creator']['name'];
-          creatorUrl = details['creator']['public_url'];
-          creatorCover = details['creator']['thumbnail'];
-          thumbnail = details['thumbnail'];
-          publicUrl = details['public_url'];
-
-          let added = details['added'];
-          let dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          addedDate = new Date(added).toLocaleDateString();
-        } else {
-          isFirstLaunch = true;
-        }
+        displayDetails(details)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
+  }
+
+  function displayDetails(details){
+    if (details != null && details != undefined) {
+      isFirstLaunch = false;
+
+      name = details['name'];
+      likeCount = details['like_count'] == undefined ? '-' : details['like_count'];
+      collectCount = details['collect_count'] == undefined ? '-' : details['collect_count'];
+      commentCount = details['comment_count'] == undefined ? '-' : details['comment_count'];
+      viewCount = details['view_count'] == undefined ? '-' : details['view_count'];
+      creatorName = details['creator']['name'];
+      creatorUrl = details['creator']['public_url'];
+      creatorCover = details['creator']['thumbnail'];
+      thumbnail = details['thumbnail'];
+      publicUrl = details['public_url'];
+
+      let added = details['added'];
+      addedDate = new Date(added).toLocaleDateString();
+    } else {
+      isFirstLaunch = true;
+    }
   }
 </script>
 
 {#if isFirstLaunch}
   <Welcome />
 {:else}
-  <div class="flex items-center justify-center">
-    <div class="w-full rounded-xl p-4 shadow-2xl shadow-blue-200/25">
+  <div class="flex flex-col items-center justify-center">
+    <div class="w-full">
+      <form on:submit|preventDefault={getCurrentDetails}>
+        <div class="flex">
+          <div class="relative w-full">
+            <input type="search" bind:value={manualInputVal} class="caret-current z-20 block w-full rounded-lg border border-l-2 border-gray-600 bg-gray-700 p-1.5 text-xs text-white placeholder:italic placeholder-gray-400 placeholder:text-xs" placeholder="https://www.thingiverse.com/thing:6145551" required />
+            <button type="submit" class="absolute right-0 top-0 h-full rounded-r-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 px-3 py-2 text-center shadow-lg shadow-blue-800/80 hover:bg-gradient-to-br text-sm font-medium text-white">
+              <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="w-full rounded-xl mt-2 p-4 shadow-2xl shadow-blue-200/25">
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-12">
         <!-- Inner Header -->
         <div class="inline-flex items-center">

@@ -1,6 +1,41 @@
-<div class="mb-2">
-  <h5 class="text-lg font-medium text-white">Quick Access</h5>
-</div>
+<script lang="ts">
+  import { removeActiveTabPermission, requestActiveTabPermission, getActiveTabPermission } from "../utils/helpers";
+
+  let isAccessGranted: boolean;
+
+  getPermission();
+  
+  function getPermission(){
+    getActiveTabPermission().then((result) => {
+      isAccessGranted = result;
+    })
+  }
+
+  function toggleActiveTabPermission(){
+    getPermission();
+
+    if(isAccessGranted){
+      removeActiveTabPermission();
+    }
+    else{
+      requestActiveTabPermission();
+    }
+
+    getPermission();
+  }
+
+</script>
+
+<h5 class="text-lg font-medium text-white">Permissions</h5>
+<h5 class="text-xs text-gray-300">Automatically detect when on a Thingiverse page.</h5>
+
+{#if isAccessGranted}
+  <button type="button" on:click={toggleActiveTabPermission} class="mt-2 rounded-lg bg-gradient-to-r from-red-500 via-red-600 to-red-700 px-4 py-1.5 text-center text-sm font-medium text-white shadow-lg shadow-red-800/80 hover:bg-gradient-to-br">Revoke Access</button>
+{:else}
+  <button type="button" on:click={toggleActiveTabPermission} class="mt-2 rounded-lg bg-gradient-to-r from-green-500 via-green-600 to-green-700 px-4 py-1.5 text-center text-sm font-medium text-white shadow-lg shadow-green-800/80 hover:bg-gradient-to-br">Grant Access</button>
+{/if}
+
+<h5 class="text-lg font-medium text-white my-2.5">Quick Access</h5>
 <div class="w-full rounded-lg border border-gray-600 bg-gray-700 text-white">
   <a
     href="https://www.thingiverse.com/"
@@ -351,38 +386,4 @@
     </svg>
     Firefox Addon Store
   </button>
-</div>
-<!-- Ressources -->
-<div class="mb-2 mt-5">
-  <h5 class="text-lg font-medium text-white">Ressources</h5>
-</div>
-<div class="w-full rounded-lg border broder-b border-gray-600 bg-gray-700 text-white">
-  <a
-    href="https://tailwindcss.com/"
-    target="_blank"
-    type="button"
-    class="relative inline-flex w-full items-center rounded-t-lg px-4 py-2 text-sm border-b font-medium border-gray-600 hover:bg-gray-600"
-    >Tailwind CSS
-  </a>
-  <a
-    href="https://svelte.dev/"
-    target="_blank"
-    type="button"
-    class="relative inline-flex w-full items-center px-4 py-2 text-sm font-medium border-b border-gray-600 hover:bg-gray-600"
-    >Svelte
-  </a>
-  <a
-    href="https://github.com/Stuk/jszip"
-    target="_blank"
-    type="button"
-    class="relative inline-flex w-full items-center px-4 py-2 text-sm font-medium border-b border-gray-600 hover:bg-gray-600"
-    >JSZip
-  </a>
-  <a
-    href="https://github.com/eligrey/FileSaver.js"
-    target="_blank"
-    type="button"
-    class="relative inline-flex w-full items-center rounded-b-lg px-4 py-2 text-sm font-medium border-gray-600 hover:bg-gray-600"
-    >FileSaver.js
-  </a>
 </div>

@@ -44,6 +44,49 @@ export function setToStorage(key: string, value: object | string) {
   });
 }
 
+////////////////////////////
+// Permissions
+////////////////////////////
+
+export function getActiveTabPermission(): Promise<boolean>{
+  return new Promise((resolve) =>{
+    chrome.permissions.contains({
+      permissions: ['activeTab']
+    }, (result) => {
+      if (result) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  });
+}
+
+export function removeActiveTabPermission(){
+  chrome.permissions.remove({
+    permissions: ['activeTab']
+  }, (removed) => {
+    if (removed) {
+      // The permissions have been removed.
+    } else {
+      // The permissions have not been removed (e.g., you tried to remove
+      // required permissions).
+    }
+  });
+}
+
+export function requestActiveTabPermission(){
+  chrome.permissions.request({
+    permissions: ['activeTab']
+  }, (granted) => {
+    if (granted) {
+      // Granted
+    } else {
+      // Not granted
+    }
+  });
+}
+
 export function getActiveUrl(): Promise<string> {
   return new Promise((resolve) => {
     chrome.permissions.contains({

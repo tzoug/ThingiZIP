@@ -75,8 +75,8 @@
       <form on:submit|preventDefault={getCurrentDetails}>
         <div class="flex">
           <div class="relative w-full">
-            <input type="search" bind:value={manualInputVal} class="caret-current z-20 block w-full rounded-lg border border-l-2 border-gray-600 bg-gray-700 p-1.5 text-sm text-white placeholder:italic placeholder-gray-400 placeholder:text-xs" placeholder="https://www.thingiverse.com/thing:6145551" required />
-            <button type="submit" class="absolute right-0 top-0 h-full rounded-r-lg border-blue-700 bg-blue-600 p-2.5 text-sm font-medium text-white hover:bg-blue-800">
+            <input type="search" bind:value={manualInputVal} class="caret-current z-20 block w-full rounded-lg border border-l-2 border-gray-600 bg-gray-700 p-1.5 text-xs text-white placeholder:italic placeholder-gray-400 placeholder:text-xs" placeholder="https://www.thingiverse.com/thing:6145551" required />
+            <button type="submit" class="absolute right-0 top-0 h-full rounded-r-lg bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 px-3 py-2 text-center shadow-lg shadow-blue-800/80 hover:bg-gradient-to-br text-sm font-medium text-white">
               <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
               </svg>

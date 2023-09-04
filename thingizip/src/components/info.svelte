@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { removeActiveTabPermission, requestActiveTabPermission, getActiveTabPermission } from "../utils/helpers";
+
   let isAccessGranted: boolean;
 
   getPermission();
@@ -9,45 +11,14 @@
     })
   }
 
-  function getActiveTabPermission(): Promise<boolean>{
-    return new Promise((resolve) =>{
-      chrome.permissions.contains({
-        permissions: ['activeTab']
-      }, (result) => {
-        if (result) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      });
-    });
-  }
-
   function toggleActiveTabPermission(){
     getPermission();
 
     if(isAccessGranted){
-      chrome.permissions.remove({
-        permissions: ['activeTab']
-      }, (removed) => {
-        if (removed) {
-          // The permissions have been removed.
-        } else {
-          // The permissions have not been removed (e.g., you tried to remove
-          // required permissions).
-        }
-      });
+      removeActiveTabPermission();
     }
     else{
-      chrome.permissions.request({
-        permissions: ['activeTab']
-      }, (granted) => {
-        if (granted) {
-          // Granted
-        } else {
-          // Not granted
-        }
-      });  
+      requestActiveTabPermission();
     }
 
     getPermission();

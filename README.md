@@ -4,6 +4,14 @@
 
 ThingiZIP is a web browser extension that makes it easy to download images and files from Thingiverse™. This extension creates an interactive popup in the toolbar of your browser. This project utilizes the Thingiverse™ API. Please note that if the Thingiverse™ API changes, the performance and/or functionality of this extension may be impacted.
 
+## Download
+
+[![Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)](https://chrome.google.com/webstore/detail/thingizip/maonfmeilcpjfdipacfehiidjngcoama)
+
+[![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)](https://addons.mozilla.org/en-US/firefox/addon/thingizip/)
+
+[![GithubRelease](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tzoug/ThingiZIP/releases)
+
 ## Usage
 
 To download a ZIP file, you must be on a valid Thingiverse™ model page.  
@@ -18,10 +26,11 @@ For example, `https://www.thingiverse.com/thing:1234567/files` is also a valid p
 This is where you will be able to download and view information about the last Thingiverse page you visited.
 
 You can either:
+
 - Download Files: only download the files (`.stl`, `.obj`, `.gcode`... )
 - Download All: download the files + images + `details.txt`
 
-<img src="images/thingizip-main-page.jpg" alt="drawing" width="500"/>
+<img src="images/thingizip-main.png" alt="drawing" width="500"/>
 
 ### Recents
 
@@ -40,16 +49,18 @@ If you have any issues, feel free to create a GitHub issue if it hasn't already 
 
 Contributions are always welcome!
 
-## Ressources Used
+## Technologies used
 
-- [TailwindCSS](https://tailwindcss.com/) : extension UI
-- [Svelte](https://svelte.dev/) : extension UI
-- [Heroicons](https://heroicons.com/) : icons
-- [JSZip](https://stuk.github.io/jszip/) : create zip files
-- [JSZip Utils](https://github.com/Stuk/jszip-utils) : create zip files
-- [FileSaver](https://github.com/eligrey/FileSaver.js/) : save zip files
+![Svelte](https://img.shields.io/badge/svelte-%23f1413d.svg?style=for-the-badge&logo=svelte&logoColor=white)
 
-## Download
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-- [Chrome Web Store](https://chrome.google.com/webstore/detail/thingizip/maonfmeilcpjfdipacfehiidjngcoama)
-- [Firefox Addon Store](https://addons.mozilla.org/en-CA/firefox/addon/thingizip/)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+
+[Heroicons](https://heroicons.com/)
+
+[JSZip](https://stuk.github.io/jszip/)
+
+[JSZip Utils](https://github.com/Stuk/jszip-utils)
+
+[FileSaver](https://github.com/eligrey/FileSaver.js/)
